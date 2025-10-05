@@ -3,6 +3,7 @@ class Car{
   PVector[] body;  //車体の座標データ
   PVector[] roof;  //屋根
   PVector[] tire; //タイヤ
+  PVector[] tire2; 
   float carWidth;
   float carHeight;
   
@@ -28,33 +29,77 @@ class Car{
     roof[2] = new PVector ( params.player_Fx + carWidth*((float)6/20), params.player_Fy - carHeight*((float)5/10) );
     roof[3] = new PVector ( params.player_Fx + carWidth*((float)7/20), params.player_Fy - carHeight*((float)3/10) );
     
-  }
+    tire = new PVector[4];
+    tire[0] = new PVector ( params.player_Fx - carWidth*(1f/2) , params.player_Fy + carHeight*(1f/10) );
+    tire[1] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(1f/10) );
+    tire[2] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(5f/10) );
+    tire[3] = new PVector ( params.player_Fx - carWidth*(1f/2) , params.player_Fy + carHeight*(5f/10) );
+    
+    tire2 = new PVector[4];
+    tire2[0] = new PVector ( params.player_Fx + carWidth*(8f/20), params.player_Fy + carHeight*(1f/10) );
+    tire2[1] = new PVector ( params.player_Fx + carWidth*(10f/20) , params.player_Fy + carHeight*(1f/10) );
+    tire2[2] = new PVector ( params.player_Fx + carWidth*(10f/20) , params.player_Fy + carHeight*(5f/10) );
+    tire2[3] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(5f/10) );
+
+}
+  
   void update(GameParameter params) { 
     if(params.speed + params.diffSpeed >= params.spdMax) params.speed = params.spdMax;
       else if(params.speed + params.diffSpeed <= params.spdMin) params.speed = params.spdMin;
         else params.speed += params.diffSpeed;
   }
-  void draw() {
-    
-    //rect(params.player_Fx-40/2,params.player_Fy,40,40);
-
-
   
+  void draw() {
     fill(47,79,79);
     //タイヤ
-    rect(params.player_Fx - carWidth*((float)1/2), params.player_Fy + carHeight*((float)1/10), carWidth*((float)2/20), carHeight*((float)4/10));
-    rect(params.player_Fx + carWidth*((float)8/20), params.player_Fy + carHeight*((float)1/10), carWidth*((float)2/20), carHeight*((float)4/10));
+    beginShape();
+    for (int i=0; i<tire.length; i++) {
+      PVector v = loadVector(tire[i]);
+      vertex(v.x, v.y);
+      }
+    endShape(CLOSE);
     
-  beginShape();
-  fill(255, 0, 0);
-  for (int i=0; i<body.length; i++) {
-    PVector v = body[i].copy();
-    if (v.x < 0) v.y =v.y * params.leftScale;   // 左側
-    else if (v.x > 0) v.y= v.y * params.rightScale; // 右側
-    vertex(v.x, v.y);
+    beginShape();
+    for (int i=0; i<tire2.length; i++) {
+      PVector v = loadVector(tire2[i]);
+      vertex(v.x, v.y);
+      }
+    endShape(CLOSE);
+    
+    beginShape();
+    fill(255, 0, 0);
+    for (int i=0; i<body.length; i++) {
+      PVector v = loadVector(body[i]);
+      vertex(v.x, v.y);
+      }
+    endShape(CLOSE);
+    //屋根
+    beginShape();
+    fill(255, 0, 0);
+    for (int i=0; i<roof.length; i++) {
+      PVector v = loadVector(roof[i]);
+      vertex(v.x, v.y);
+    }
+    endShape(CLOSE);
   }
-  endShape(CLOSE);
-  
-  }
+
+  //座標の指定要素をハンドル入力に合わせて補正
+  PVector loadVector (PVector input){
+      PVector v = input.copy();
+      if (v.x < params.player_Fx) {
+        if (v.y <params.player_Fy) {
+          v.y =v.y * params.downScale;
+        }else if (v.y > params.player_Fy) {
+          v.y = v.y * params.upScale;
+        }
+      }
+      else if (v.x > params.player_Fx) { 
+        if (v.y <params.player_Fy) {
+          v.y =v.y * params.upScale;
+        }else if (v.y > params.player_Fy) {
+          v.y = v.y * params.downScale;
+        }
+      }
+      return v;
+   }
 }
-    

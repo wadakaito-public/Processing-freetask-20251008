@@ -9,8 +9,8 @@ float player_x, player_y,player_Fx, player_Fy;
 float spdMin,spdMax;//現在のギアでのスピード上限下限
 //ハンドルを切ると車体描画補正
 float scaleR;
-float leftScale = 1;
-float rightScale = 1;
+float upScale = 1;
+float downScale = 1;
 //
 float carWidth;
 float carHeight;
@@ -41,16 +41,17 @@ GameParameter(){
     // 消失点左右移動
     if (left)  {
       vx -= 1;
-      leftScale = 1.1;
-      rightScale = 0.9;
+      upScale = 1.002;
+      downScale = 0.998;
     }else if (right == false){
-      
+      upScale = 1.0;
+      downScale = 1.0;
     }
     
     if (right) {
       vx += 1;
-      leftScale = 0.9;
-      rightScale = 1.1;
+      upScale = 0.998;
+      downScale = 1.002;
       //player_Fx += 1;
     }
       

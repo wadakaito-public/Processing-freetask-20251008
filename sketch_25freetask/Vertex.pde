@@ -13,8 +13,6 @@ class Vertex{
   PVector Ver;    // 目的の頂点(スピード連動で移動させたい)
   PVector Np; //NearPoint 近点。画面下とパース線の交点
   
-  //ここまで引数にしたい ！！可変であること！！
-  
   Vertex(GameParameter params) {
     this.params = params;
     vy = 0;//これが引数になる予定
@@ -32,8 +30,8 @@ class Vertex{
     float a = (van.y - Np.y) / (van.x - Np.x);
     Ver.y = (vy);
     Ver.x = (Ver.y - van.y) / a + van.x;
-      println("a=" + a + " van=" + van + " Np=" + Np + " Ver=" + Ver);
-      println("原点origin"+origin+"引数 vx= "+vx+"引数 vy= "+vy +params.horizon);
+      //println("a=" + a + " van=" + van + " Np=" + Np + " Ver=" + Ver);
+      //println("原点origin"+origin+"引数 vx= "+vx+"引数 vy= "+vy +params.horizon);
   }
   
   PVector getVertex(float vx,float vy){
