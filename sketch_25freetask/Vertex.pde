@@ -34,6 +34,7 @@ class Vertex{
       //println("原点origin"+origin+"引数 vx= "+vx+"引数 vy= "+vy +params.horizon);
   }
   
+  //交点座標 getVertex(消失点のx座標，任意のy座標)
   PVector getVertex(float vx,float vy){
     update(vx-origin.x,vy);
     return Ver.copy();

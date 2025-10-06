@@ -19,7 +19,6 @@ class Ground {
   rect(0,params.horizon,width,height-params.horizon);
   popStyle();
   
-  //中心線
-  
+
   }
 }

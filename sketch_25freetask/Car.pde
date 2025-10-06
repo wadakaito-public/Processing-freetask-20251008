@@ -53,15 +53,23 @@ class Car{
     window[3] = new PVector ( params.player_Fx + carWidth*(6f/20) , params.player_Fy - carHeight*(3f/10) );
 
     backDoor = new PVector[8];
-    backDoor[0] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy - carHeight*(0f/10) );
+    backDoor[0] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy - carHeight*(1f/10) );
     backDoor[1] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy - carHeight*(2f/10) );
     backDoor[2] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy - carHeight*(2f/10) );
-    backDoor[3] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(0f/10) );
-    backDoor[4] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(2f/10) );
-    backDoor[5] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(3f/10) );
-    backDoor[6] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(3f/10) );
-    backDoor[7] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy + carHeight*(2f/10) );
+    backDoor[3] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy - carHeight*(1f/10) );
+    backDoor[4] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(1f/10) );
+    backDoor[5] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(2f/10) );
+    backDoor[6] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(2f/10) );
+    backDoor[7] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy + carHeight*(1f/10) );
 
+    bumper = new PVector[5];
+    bumper[0] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy + carHeight*(1f/10) );
+    bumper[1] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(1f/10) );
+    bumper[2] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(2f/10) );
+    bumper[3] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(2f/10) );
+    bumper[4] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy + carHeight*(1f/10) );
+
+    
 }
   
   void update(GameParameter params) { 
@@ -115,6 +123,14 @@ class Car{
     fill(65,105,225);
     for (int i=0; i<backDoor.length; i++) {
       PVector v = loadVector(backDoor[i]);
+      vertex(v.x, v.y);
+    }
+    endShape(CLOSE);
+    
+    beginShape();
+    fill(0,0,0);
+    for (int i=0; i<bumper.length; i++) {
+      PVector v = loadVector(bumper[i]);
       vertex(v.x, v.y);
     }
     endShape(CLOSE);

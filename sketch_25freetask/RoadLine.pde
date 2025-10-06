@@ -2,6 +2,7 @@ class RoadLine{
   GameParameter params;
   Vertex ver;
   ArrayList<Float> ys;
+  
   RoadLine(GameParameter params) {
     this.params = params;
     this.ver = new Vertex(params);
@@ -30,10 +31,32 @@ class RoadLine{
     }
   }
   void draw() {
+    //道路
+    beginShape();
+    fill(102,102,102);
+    PVector r1 = ver.getVertex( params.roadCenter + params.vx , params.horizon );
+    PVector r2 = ver.getVertex( params.roadCenter + params.vx+width/1.2 , height );
+    PVector r3 = ver.getVertex( params.roadCenter + params.vx-width/1.2 , height );
+    vertex(r1.x,r1.y);
+    vertex(r2.x,r2.y);
+    vertex(r3.x,r3.y);
+    endShape(CLOSE);
+    
+    
     for (int i = 0; i < ys.size(); i++){
-      PVector p = ver.getVertex(params.roadCenter+params.vx,(ys.get(i)));
+      float lineWidth = 10;
+      float lineHeight = 40;
+      PVector p = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) );
+      //中央線の頂点a,b,c,d
+      
+      /*PVector a = new PVecter( p.x-
+      PVector b = new PVecter(
+      PVector c = new PVecter(
+      PVector d = new PVecter(*/
       fill(0, 255, 255);
       ellipse(p.x,p.y, 10, 10);
     }
+    
+    
   }
 }
