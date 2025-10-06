@@ -4,6 +4,11 @@ class Car{
   PVector[] roof;  //屋根
   PVector[] tire; //タイヤ
   PVector[] tire2; 
+  PVector[] window;
+  PVector[] backDoor;
+  PVector[] bumper;
+  PVector[] muffler;
+  PVector[] tallLight;
   float carWidth;
   float carHeight;
   
@@ -40,6 +45,22 @@ class Car{
     tire2[1] = new PVector ( params.player_Fx + carWidth*(10f/20) , params.player_Fy + carHeight*(1f/10) );
     tire2[2] = new PVector ( params.player_Fx + carWidth*(10f/20) , params.player_Fy + carHeight*(5f/10) );
     tire2[3] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(5f/10) );
+    
+    window = new PVector[4];
+    window[0] = new PVector ( params.player_Fx - carWidth*(6f/20) , params.player_Fy - carHeight*(3f/10) );
+    window[1] = new PVector ( params.player_Fx - carWidth*(5f/20) , params.player_Fy - carHeight*(4.5f/10) );
+    window[2] = new PVector ( params.player_Fx + carWidth*(5f/20) , params.player_Fy - carHeight*(4.5f/10) );
+    window[3] = new PVector ( params.player_Fx + carWidth*(6f/20) , params.player_Fy - carHeight*(3f/10) );
+
+    backDoor = new PVector[8];
+    backDoor[0] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy - carHeight*(0f/10) );
+    backDoor[1] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy - carHeight*(2f/10) );
+    backDoor[2] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy - carHeight*(2f/10) );
+    backDoor[3] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(0f/10) );
+    backDoor[4] = new PVector ( params.player_Fx + carWidth*(9f/20) , params.player_Fy + carHeight*(2f/10) );
+    backDoor[5] = new PVector ( params.player_Fx + carWidth*(8f/20) , params.player_Fy + carHeight*(3f/10) );
+    backDoor[6] = new PVector ( params.player_Fx - carWidth*(8f/20) , params.player_Fy + carHeight*(3f/10) );
+    backDoor[7] = new PVector ( params.player_Fx - carWidth*(9f/20) , params.player_Fy + carHeight*(2f/10) );
 
 }
   
@@ -78,6 +99,22 @@ class Car{
     fill(255, 0, 0);
     for (int i=0; i<roof.length; i++) {
       PVector v = loadVector(roof[i]);
+      vertex(v.x, v.y);
+    }
+    endShape(CLOSE);
+    
+    beginShape();
+    fill(65,105,225);
+    for (int i=0; i<window.length; i++) {
+      PVector v = loadVector(window[i]);
+      vertex(v.x, v.y);
+    }
+    endShape(CLOSE);
+    
+    beginShape();
+    fill(65,105,225);
+    for (int i=0; i<backDoor.length; i++) {
+      PVector v = loadVector(backDoor[i]);
       vertex(v.x, v.y);
     }
     endShape(CLOSE);
