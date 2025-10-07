@@ -23,9 +23,9 @@ class Vertex{
     Np = new PVector(origin.x,origin.y); // 初期近点
     Ver = new PVector();//戻り値
   }
-  void update(float vx,float vy) {
+  void update(float vx,float vy,float NpDiff) {
     van.x = (origin.x + vx);
-    Np.x = (origin.x + vx/2);
+    Np.x = (origin.x + vx/2 + NpDiff);
     // パース線 VNp の傾き
     float a = (van.y - Np.y) / (van.x - Np.x);
     Ver.y = (vy);
@@ -34,9 +34,9 @@ class Vertex{
       //println("原点origin"+origin+"引数 vx= "+vx+"引数 vy= "+vy +params.horizon);
   }
   
-  //交点座標 getVertex(消失点のx座標，任意のy座標)
-  PVector getVertex(float vx,float vy){
-    update(vx-origin.x,vy);
+  //交点座標 getVertex(消失点のx座標，任意のy座標, 近点Npの補正(初期は原点))
+  PVector getVertex(float vx,float vy,float NpDiff){
+    update(vx-origin.x,vy,NpDiff);
     return Ver.copy();
   }
 

@@ -34,9 +34,9 @@ class RoadLine{
     //道路
     beginShape();
     fill(102,102,102);
-    PVector r1 = ver.getVertex( params.roadCenter + params.vx , params.horizon );
-    PVector r2 = ver.getVertex( params.roadCenter + params.vx+width/1.2 , height );
-    PVector r3 = ver.getVertex( params.roadCenter + params.vx-width/1.2 , height );
+    PVector r1 = ver.getVertex( params.roadCenter + params.vx , params.horizon , 0);
+    PVector r2 = ver.getVertex( params.roadCenter + params.vx+width/1.2 , height , 0);
+    PVector r3 = ver.getVertex( params.roadCenter + params.vx-width/1.2 , height , 0 );
     vertex(r1.x,r1.y);
     vertex(r2.x,r2.y);
     vertex(r3.x,r3.y);
@@ -44,17 +44,26 @@ class RoadLine{
     
     
     for (int i = 0; i < ys.size(); i++){
-      float lineWidth = 10;
-      float lineHeight = 40;
-      PVector p = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) );
+      float lineWidth = 40;
+      float lineHeight = 20;
+      PVector p = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) ,0 );
       //中央線の頂点a,b,c,d
       
-      /*PVector a = new PVecter( p.x-
-      PVector b = new PVecter(
-      PVector c = new PVecter(
-      PVector d = new PVecter(*/
+      PVector a = ver.getVertex( p.x , p.y , -lineWidth/2 );
+      PVector b = ver.getVertex( p.x , p.y , lineWidth/2 );
+      PVector c = ver.getVertex( p.x , p.y + lineHeight , -lineWidth/2 );
+      PVector d = ver.getVertex( p.x , p.y + lineHeight , lineWidth/2 );
+      beginShape();
+      fill(255, 255, 255);
+      vertex(a.x , a.y );
+      vertex(b.x , b.y );
+      vertex(c.x , c.y );
+      vertex(d.x , d.y );
+      endShape(CLOSE);
       fill(0, 255, 255);
       ellipse(p.x,p.y, 10, 10);
+
+      
     }
     
     
