@@ -15,17 +15,23 @@ class Vertex{
   
   Vertex(GameParameter params) {
     this.params = params;
+    this.origin = params.origin;
     vy = 0;//これが引数になる予定
     vx = 0;
     van = new PVector(vx,params.horizon);//vanishingPoint,消失点
-    origin = new PVector(width/2, height); // 原点
     x0 = width/2;                           // 法線は画面中央
-    Np = new PVector(origin.x,origin.y); // 初期近点
     Ver = new PVector();//戻り値
+    Np = new PVector();
   }
   void update(float vx,float vy,float NpDiff) {
     van.x = (origin.x + vx);
-    Np.x = (origin.x + vx/2 + NpDiff);
+    params.Np.x = (origin.x + vx/2 );
+    if(NpDiff == 0){
+      this.Np.x = params.Np.x;
+    }else{
+      this.Np.x = params.Np.x + NpDiff;
+    }
+      
     // パース線 VNp の傾き
     float a = (van.y - Np.y) / (van.x - Np.x);
     Ver.y = (vy);

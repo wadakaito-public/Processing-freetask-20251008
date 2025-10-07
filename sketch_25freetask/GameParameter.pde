@@ -36,6 +36,8 @@ GameParameter(){
     spdMax = 200;
     carWidth = 150;
     carHeight = 80;
+    origin = new PVector(width/2, height); // 原点
+    Np = new PVector(origin.x,origin.y); // 初期近点
 }
   void input(boolean left,boolean right,boolean up,boolean down){
     // 消失点左右移動

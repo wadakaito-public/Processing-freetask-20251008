@@ -5,6 +5,8 @@ boolean left;
 boolean right;
 boolean up;
 boolean down;
+boolean a;
+boolean d;
 
 void setup(){
   size(800,600);
@@ -16,7 +18,7 @@ void setup(){
 }
 void draw(){
   background(200);
-  vertex.input(left,right,up,down);
+  vertex.input(left,right,up,down,a,d);
   vertex.update();
   vertex.draw();
 } 
@@ -27,6 +29,8 @@ void keyPressed() {
   if (keyCode == RIGHT) right = true;
   if (keyCode == UP)    up = true;
   if (keyCode == DOWN)  down = true;
+  if (key == 'a' ) a = true;
+  if (key == 'd' ) d = true;
 }
 
 void keyReleased() {
@@ -34,6 +38,8 @@ void keyReleased() {
   if (keyCode == RIGHT) right = false;
   if (keyCode == UP)    up = false;
   if (keyCode == DOWN)  down = false;
+  if (key == 'a' ) a = false;
+  if (key == 'd' ) d = false;
 }
   
 class GameParameter{
@@ -44,6 +50,7 @@ float speedLimit;//スピード限界値
 float roadWidthTop, roadWidthBottom;
 float player_x, player_y,player_Fx, player_Fy;
 float spdMin,spdMax;//現在のギアでのスピード上限下限
+float diff;
 
 GameParameter(){
     horizon = height*0.3;//地平線
@@ -90,7 +97,7 @@ class Vertex{
     float a = (van.y - Np.y) / (van.x - Np.x);
     //  中点に追従（必要に応じて）
     van.x = (origin.x + vx);
-    Np.x = (origin.x + vx/2);
+    Np.x = (origin.x + vx/2+params.diff);
     Ver.y = (origin.y + vy);
     Ver.x = (Ver.y - van.y) / a + van.x;
     
@@ -136,13 +143,16 @@ class Vertex{
     text("消失点 van.x = " + nf(van.x,1,2) +", 近点 Np.x = " + nf(Np.x,1,2) , 20, 20);
     text("入力値 vx = " + nf(vx,1,2) + ", 入力値 vy = " + nf(Ver.y,1,2)+"出力 Ver.x ="+ nf(Ver.x,1,2), 20, 40);
   }
-  void input(boolean left,boolean right,boolean up,boolean down){
+  void input(boolean left,boolean right,boolean up,boolean down,boolean a,boolean d){
     // 消失点左右移動
     if (left)  vx -= 1;
     if (right) vx += 1;
-
+    
     // 上底中点上下移動
     if (up)   vy -= 1 ;
     if (down)  vy += 1;
+    
+    if (a) params.diff-=1;
+    if (d) params.diff+=1;
   }
 }
