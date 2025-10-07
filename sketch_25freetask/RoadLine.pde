@@ -8,7 +8,7 @@ class RoadLine{
     this.ver = new Vertex(params);
     ys = new ArrayList<Float>();
     //可変長配列ys 描画のために一定間隔のy座標で区切る
-    for(float y = params.horizon ; y < height  ; y += 40){
+    for(float y = params.horizon ; y < height  ; y += 20){
     ys.add(y);}
 
   }
@@ -25,8 +25,8 @@ class RoadLine{
       ys.remove(0);
     }
     float lastY = ys.get(ys.size()-1);
-    if (lastY >=params.horizon + 40){
-      ys.add(lastY - 40); // 上の方に等間隔で追加
+    if (lastY >=params.horizon + 20){
+      ys.add(lastY - 20);// 上の方に等間隔で追加
     }
   }
   void draw() {
@@ -41,8 +41,9 @@ class RoadLine{
     vertex(r3.x,r3.y);
     endShape(CLOSE);
     
-    
-    for (int i = 0; i < ys.size(); i++){
+    //memo
+    //傾きを返すメソッドをVertexクラスに追加して、その傾きを元に+y方向の座標を算出すればいいのでは？？？
+    for (int i = 0; i < ys.size()-1; i++){
       float lineWidth = 40;
       float lineHeight = 30;
       PVector p = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) ,0 );
@@ -50,18 +51,18 @@ class RoadLine{
       //中央線の頂点a,b,c,d
       println(Np);
       println(params.horizon);
-      
+      if(i % 2 != 0){
       PVector a = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) ,(lineWidth/2) );
       PVector b = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) ,-(lineWidth/2) );
-      PVector c = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)+(p.y*0.05) ) ,-(lineWidth/2) );
-      PVector d = p.copy();
+      PVector c = ver.getVertex( params.roadCenter + params.vx , (ys.get(i+1) ) ,-(lineWidth/2) );
+      PVector d = ver.getVertex( params.roadCenter + params.vx , (ys.get(i+1) ) ,(lineWidth/2) );
       PVector h = ver.getVertex( params.roadCenter + params.vx , (ys.get(i)) ,-(lineWidth/2) );
       //a.x -= lineWidth;
       //b.x += lineWidth;
       //c.x += lineWidth;
-      d.x -= lineWidth;
-      c.y += lineHeight * ( p.y / ( height - params.horizon ) ) ;
-      d.y += lineHeight * ( p.y / ( height - params.horizon ) ) ;
+      //d.x -= lineWidth;
+      //c.y += lineHeight * ( p.y / ( height - params.horizon ) ) ;
+      //d.y += lineHeight * ( p.y / ( height - params.horizon ) ) ;
       beginShape();
       fill(255, 255, 255);
       vertex(a.x , a.y );
@@ -78,7 +79,7 @@ class RoadLine{
       fill(0,0,255);
       ellipse(c.x,c.y,5,5);
 
-
+      }
       
     }
     
