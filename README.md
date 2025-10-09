@@ -85,6 +85,7 @@ y軸に直行かつ任意の点を通る直線との交点を返します。<br>
 ## 実行方法
 - Processingで開く場合：
   1. `Processing-freetask-20251008-main` を開く<br>
+   もしくはReleaseからLatestバージョン<br>
   2. `sketch_25freetask.pde` を開き「実行」ボタンを押す<br>
 - 注意点や素材の配置など：
   特になし<br>
