@@ -13,7 +13,7 @@ class GameManager{
     player = new Car(params);//x,y,speed
     ground = new Ground(params);//このインスタンスを渡す
     line = new RoadLine(params);
-    sky = new Sky();
+    sky = new Sky(params);
     ui = new UserInterface(params);
   }
   

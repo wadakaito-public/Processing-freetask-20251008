@@ -70,7 +70,7 @@ class RoadLine{
       vertex(d.x , d.y );//yellow
       endShape(CLOSE);
       
-      /*デバッグ表示*/
+      /*デバッグ表示
       fill(0, 255, 255);
       ellipse(p.x,p.y, 10, 10);
       fill(0,255,0);
@@ -83,6 +83,7 @@ class RoadLine{
       ellipse(d.x,d.y,5,5);  
       fill(0,0,0);
       ellipse(params.Np.x,params.Np.y,5,5);
+      */
     }
   }
 }

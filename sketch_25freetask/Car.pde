@@ -96,7 +96,7 @@ class Car{
     endShape(CLOSE);
     
     beginShape();
-    fill(255, 0, 0);
+    fill(255,0,0);
     for (int i=0; i<body.length; i++) {
       PVector v = loadVector(body[i]);
       vertex(v.x, v.y);
@@ -104,7 +104,7 @@ class Car{
     endShape(CLOSE);
     //屋根
     beginShape();
-    fill(255, 0, 0);
+    fill(255,0,0);
     for (int i=0; i<roof.length; i++) {
       PVector v = loadVector(roof[i]);
       vertex(v.x, v.y);
@@ -112,7 +112,7 @@ class Car{
     endShape(CLOSE);
     
     beginShape();
-    fill(65,105,225);
+    fill(70,130,180);
     for (int i=0; i<window.length; i++) {
       PVector v = loadVector(window[i]);
       vertex(v.x, v.y);
@@ -120,7 +120,7 @@ class Car{
     endShape(CLOSE);
     
     beginShape();
-    fill(65,105,225);
+    fill(220,20,60);
     for (int i=0; i<backDoor.length; i++) {
       PVector v = loadVector(backDoor[i]);
       vertex(v.x, v.y);
